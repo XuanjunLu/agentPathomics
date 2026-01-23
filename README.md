@@ -5,8 +5,8 @@ agentPathomics is a modular, agent-orchestrated framework for interpretable morp
 ## Key Features
 
 - Modular architecture for ROI segmentation, histomorphometric feature extraction, model construction, and morphogenomic analysis  
-- Interpretable, handcrafted histomorphometric representations  
-- Leakage-aware model development and validation  
+- Interpretable, histomorphometric representations  
+- model development and validation  
 - Task-scoped AI agent orchestration operating on structured module inputs and outputs  
 - Support for multi-scale histopathological analysis and multi-omic integration  
 
