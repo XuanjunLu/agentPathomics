@@ -26,3 +26,27 @@ agentPathomics/
 ├── configs/               # Configuration files and templates
 ├── scripts/               # Example workflows and utilities
 └── README.md
+
+## conda install
+`$ conda create --name agentPathomics python=3.8`
+
+`$ conda activate agentPathomics`
+
+`$ cd agentPathomics`
+
+`$ python -m pip install -r requirements.txt`
+
+`$ python -m pip install -e .`
+
+## run examples
+`$ python example/hello.py`
+
+### need to set data source in examples below
+
+`$ python example/example1.py`
+
+`$ python example/example2.py`
+
+`$ python example/example3.py`
+
+`$ python example/example4.py`
