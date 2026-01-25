@@ -41,12 +41,6 @@ agentPathomics/
 ## run examples
 `$ python example/hello.py`
 
-### need to set data source in examples below
+### pipeline
 
-`$ python example/example1.py`
-
-`$ python example/example2.py`
-
-`$ python example/example3.py`
-
-`$ python example/example4.py`
+`$ bash pipeline/run.sh
