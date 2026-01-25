@@ -43,4 +43,4 @@ agentPathomics/
 
 ### pipeline
 
-`$ bash pipeline/run.sh
+`$ bash pipeline/run.sh`
