@@ -26,7 +26,7 @@ agentPathomics/
 ├── configs/               # Configuration files and templates
 ├── scripts/               # Example workflows and utilities
 └── README.md
-
+```
 ## conda install
 `$ conda create --name agentPathomics python=3.8`
 
