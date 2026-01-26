@@ -27,7 +27,9 @@ agentPathomics/
 ├── scripts/               # Example workflows and utilities
 └── README.md
 ```
-## conda install
+
+## Installation
+
 `$ conda create --name agentPathomics python=3.8`
 
 `$ conda activate agentPathomics`
@@ -38,9 +40,14 @@ agentPathomics/
 
 `$ python -m pip install -e .`
 
-## run examples
 `$ python example/hello.py`
 
-### pipeline
+If you can run `hello.py` successfully, it indicates that the virtual environment has been set up correctly.
+
+## Pipeline
+
+We provide an pipeline (run.sh) to automatically execute a series of workflows, including feature extraction, model construction, survival analysis, and gene expression analysis
+
+### usage
 
 `$ bash pipeline/run.sh`
