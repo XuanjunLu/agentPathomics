@@ -38,9 +38,9 @@ def run(imageName, maskName):
 
     # Only enable morph in nuclei
     extractor.enableFeaturesByName(
-        firstorder=[],
-        glcm=[],
-        glrlm=[]
+        firstorder=[]
+        # glcm=[],
+        # glrlm=[]
     )
 
     featureVector = extractor.execute(imageName, maskName)
@@ -53,3 +53,5 @@ if __name__ == '__main__':
     featureVectors = run(img_file, mask_file)
     for feature_name, feature_value in featureVectors.items():
         print(feature_name, feature_value)
+    print("Successfully finished")
+
