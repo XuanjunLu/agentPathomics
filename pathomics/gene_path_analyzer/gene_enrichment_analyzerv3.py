@@ -1327,7 +1327,7 @@ def enrichment_analysis(deg_res, save_dir, sources, clinical_information, clinic
         # geneListDf = geneListDf.iloc[0:200]
         wideFormatDf = createWideFormatDf(enrichmentDf, geneListDf)
         generateHeatmap(
-            wideFormatDf=wideFormatDf,
+            wideFormatDf=wideFormatDf.iloc[:200, :],
             title='Gene Expression Heatmap by GO Terms',
             save_dir=save_dir_feature
         )

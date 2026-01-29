@@ -177,7 +177,7 @@ def violin_plot(n_row, n_col, topk_features, features_matrix,
     for feature in topk_features:
         feature_values = features_matrix[feature]
         # label_values = matrix_M['label'].replace({0: 'Long_term_survial', 1: 'Short_term_survial'})
-        label_values = labels.replace({0: 'Low-risk', 1: 'High-risk'})
+        label_values = labels.replace({0: 'Long_term', 1: 'Short_term'})
         label_values = label_values.squeeze()
 
         feature_scores_df = pd.DataFrame({'Feature': feature_values, 'Label': label_values})
@@ -194,8 +194,8 @@ def violin_plot(n_row, n_col, topk_features, features_matrix,
         axes[row, col].tick_params(axis='y', labelsize=35)
 
         # calculate p value
-        feature_scores_0 = feature_scores_df[feature_scores_df['Label'] == 'Low-risk']['Feature']
-        feature_scores_1 = feature_scores_df[feature_scores_df['Label'] == 'High-risk']['Feature']
+        feature_scores_0 = feature_scores_df[feature_scores_df['Label'] == 'Long_term']['Feature']
+        feature_scores_1 = feature_scores_df[feature_scores_df['Label'] == 'Short_term']['Feature']
         _, p = ranksums(feature_scores_0, feature_scores_1)
         if p < 0.001:
             p = 0.001

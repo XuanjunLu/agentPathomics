@@ -223,14 +223,21 @@ class SurvivalAnalysisPlotter:
                 plt.savefig(os.path.join(save_dir, plot_filename))
                 plt.close(fig)
 
-    def km_curve_best_auc(self, save_path: Path) -> None:
+    def km_curve_best_combination(self, save_path: Path) -> None:
         """
         Plots the KM curve for the best AUC combination(self.best_combination[0], self.best_combination[1]) of
         feature selection and classifier.
 
         :param save_path: Path to save the KM curve plot.
         """
-        save_path = save_path / "km_curve_best_auc"
+        cutoff_time = 90
+        plot_data = self.data.copy()
+        plot_data.loc[plot_data['survival_time'] > cutoff_time, 'event_status'] = 0
+        plot_data.loc[plot_data['survival_time'] > cutoff_time, 'survival_time'] = cutoff_time
+        self.data = plot_data
+
+
+        save_path = save_path / "km_curve_best_combination"
         os.makedirs(save_path, exist_ok=True)
         best_col = self.data.filter(like=self.best_combination[0]).filter(like=self.best_combination[1])
         if best_col.empty:
@@ -288,7 +295,7 @@ def main():
     plotter = SurvivalAnalysisPlotter(cross_validation=args.cross_validation, list_feats_selection=args.list_feats_selection,
                                       list_classifiers=args.list_classifiers,  n_workers=args.n_workers)
     plotter.km_curve_every(save_dir=args.survival_save_dir)
-    plotter.km_curve_best_auc(save_path=args.survival_save_dir)
+    plotter.km_curve_best_combination(save_path=args.survival_save_dir)
 
 
 if __name__ == '__main__':

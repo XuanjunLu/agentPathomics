@@ -51,10 +51,22 @@ class DifferentialExpressionAnalyzer:
         self.top_signif = top_signif
         self.long_short_dominant = None
 
+
     def load_data(self):
         """Loads the feature matrix and bulk RNA data."""
         self.feature_matrix = pd.read_csv(self.feature_matrix_path)
-        self.bulk_rna = pd.read_csv(self.bulk_rna_path)
+        df_rna = pd.read_csv(self.bulk_rna_path)
+        gene_col = df_rna.columns[0]      # gene id
+        sample_cols = df_rna.columns[1:]
+        expr = df_rna.loc[:, sample_cols].apply(pd.to_numeric, errors="coerce")
+        # low_frac：the sample ratio of every gene that expression is less than 0.5
+        low_frac = (expr < 0.1).mean(axis=1, skipna=True)
+        # Filter genes with more than 50% of samples having expression < 0.5
+        df_filtered = df_rna.loc[low_frac <= 0.5, :].copy()
+        df_filtered = df_filtered[[gene_col] + list(sample_cols)]
+        print("The number of filtered genes is", int(df_rna.shape[0])-int(df_filtered.shape[0]))
+        self.bulk_rna = df_filtered
+
 
     def get_top1_feature(self):
         auc_tabel = self.cross_validation_path / "auc_table.csv"
@@ -126,9 +138,11 @@ class DifferentialExpressionAnalyzer:
             # long term samples are more alive, control group
             if group_low_df_mean_label <= group_high_df_mean_label:
                 self.long_short_dominant = True
+                print("Lower feature values indicate lower risk")
             # short term samples are more alive, control group
             else:
                 self.long_short_dominant = False
+                print("Higher feature values indicate lower risk")
 
             # Create directories for saving data
             paths = {
@@ -323,7 +337,6 @@ def main():
     args = parser.parse_args()
     analyzer = DifferentialExpressionAnalyzer(args.dataset_feature_matrix, args.bulk_rna, args.deg_save_dir, args.cross_validation, args.top_signif)
     analyzer.run_analysis()
-
 
 
 if __name__ == '__main__':
