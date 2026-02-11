@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>agentPathomics</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=20260205ah">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js"></script>
+</head>
+<body>
+  <div id="sidebar" class="expanded">
+    <div id="sidebar-top">
+      <label for="slides">Slide:</label>
+      <select id="slides"></select>
+      <button id="reload">Reload</button>
+      <div class="file-picker">
+        <input id="fileinput" class="file-input-hidden" type="file" accept=".svs,.tif,.tiff,.ndpi" />
+        <label for="fileinput" id="fileinput-btn" class="file-btn">Choose file</label>
+        <span id="fileinput-status" class="file-status">No file selected</span>
+      </div>
+      <div style="font-size:12px;color:rgba(229,231,235,.72)">Auto-upload after selecting a file</div>
+    </div>
+    <div id="manage">
+      <h3>Slides</h3>
+      <div id="manage-list"></div>
+    </div>
+  </div>
+
+  <!-- Top bar (user info) -->
+  <div id="topbar">
+    <div class="topbar-inner" style="margin-left:0">
+      <div id="app-title" style="font-weight:900;color:#e5e7eb;letter-spacing:.02em">agentPathomics</div>
+    </div>
+  </div>
+
+  <div id="viewer"></div>
+  <div id="zoombox">
+    <div id="zoom-opt">Optical: <span id="zoom-opt-val">—</span></div>
+    <div id="zoom-eff">Display: <span id="zoom-eff-val">—</span></div>
+  </div>
+  <div id="scalebar"><div id="bar"></div><div id="barlabel"></div></div>
+
+  <!-- Right annotation sidebar toggle -->
+  <button id="rightbar-toggle" aria-label="Toggle rightbar">❯</button>
+
+  <!-- Right sidebar: overlays only -->
+  <div id="rightbar">
+    <div class="card">
+      <div class="card-header">Results</div>
+      <div class="card-body">
+        <div class="card-hint">Hint: mouse wheel to zoom, drag to pan</div>
+        <div id="overlay-panel">
+      <label class="overlay-row">
+        <input type="checkbox" id="toggle-nuclei-seg" />
+        <span>Nuclei semantic segmentation</span>
+      </label>
+      <div class="overlay-subrow">
+        <span style="min-width:54px;display:inline-block">Opacity</span>
+        <input type="range" id="nuclei-seg-opacity" min="0" max="1" step="0.05" value="0.90" />
+        <span id="nuclei-seg-opacity-val">0.90</span>
+      </div>
+      <div id="nuclei-seg-legend" class="legend">
+        <div class="legend-item"><span class="swatch sw-neoplastic"></span><span>Neoplastic</span></div>
+        <div class="legend-item"><span class="swatch sw-inflammatory"></span><span>Inflammatory</span></div>
+        <div class="legend-item"><span class="swatch sw-connective"></span><span>Connective</span></div>
+        <div class="legend-item"><span class="swatch sw-dead"></span><span>Necrosis</span></div>
+        <div class="legend-item"><span class="swatch sw-epithelial"></span><span>Epithelial</span></div>
+      </div>
+      <div id="nuclei-seg-hint" style="font-size:12px;color:#333;display:none;margin-top:6px">
+        (No nuclei_seg found for this slide)
+      </div>
+
+      <hr style="margin:10px 0" />
+
+      <label class="overlay-row">
+        <input type="checkbox" id="toggle-tissue-mask" />
+        <span>TLS mask</span>
+      </label>
+      <div class="overlay-subrow">
+        <span style="min-width:54px;display:inline-block">Opacity</span>
+        <input type="range" id="tissue-mask-opacity" min="0" max="1" step="0.05" value="0.90" />
+        <span id="tissue-mask-opacity-val">0.90</span>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch sw-lymph"></span><span>Tertiary Lymphoid Structure</span></div>
+      </div>
+      <div id="tissue-mask-hint" style="font-size:12px;color:#333;display:none;margin-top:6px">
+        (No tissue_mask found for this slide)
+      </div>
+
+      <hr style="margin:10px 0" />
+
+      <label class="overlay-row">
+        <input type="checkbox" id="toggle-tissue-seg-full" />
+        <span>Tumor & Microenvironment</span>
+      </label>
+      <div class="overlay-subrow">
+        <span style="min-width:54px;display:inline-block">Opacity</span>
+        <input type="range" id="tissue-seg-full-opacity" min="0" max="1" step="0.05" value="0.90" />
+        <span id="tissue-seg-full-opacity-val">0.90</span>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="swatch sw-tme-tumor"></span><span>Tumor</span></div>
+        <div class="legend-item"><span class="swatch sw-tme-stroma"></span><span>Stroma</span></div>
+        <div class="legend-item"><span class="swatch sw-tme-lymph"></span><span>Infiltrating Lymphocytes</span></div>
+        <div class="legend-item"><span class="swatch sw-tme-necrosis"></span><span>Necrosis</span></div>
+      </div>
+      <div id="tissue-seg-full-hint" style="font-size:12px;color:#333;display:none;margin-top:6px">
+        (No tissue_seg/full_images found for this slide)
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom confirm modal (avoid OS-localized confirm/cancel text) -->
+  <div id="confirm-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+    <div class="modal-backdrop" data-modal-close="1"></div>
+    <div class="modal-card">
+      <div class="modal-title" id="confirm-title">Confirm delete</div>
+      <div class="modal-body" id="confirm-message">Are you sure you want to delete this slide?</div>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn-secondary" type="button">Cancel</button>
+        <button id="confirm-ok" class="btn-danger" type="button">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap diagnostic script (runs before viewer.js) -->
+  <script>
+    console.log('[bootstrap] before viewer.js');
+    // show a visible badge so we know this inline script executed
+    (function(){ try{ var b=document.createElement('div'); b.id='early-badge'; b.textContent='bootstrap OK'; b.style.position='fixed'; b.style.right='10px'; b.style.bottom='10px'; b.style.zIndex=99999; b.style.background='rgba(255,0,0,0.9)'; b.style.color='#fff'; b.style.padding='4px 8px'; b.style.borderRadius='4px'; document.body.appendChild(b); }catch(e){}
+    })();
+    // capture uncaught errors early
+    window.addEventListener('error', function(e){
+      console.error('[bootstrap] error captured', e.message, e.filename, e.lineno, e.colno);
+      try{ fetch('/debug').then(r=>r.json()).then(j=>console.log('[bootstrap] /debug', j)).catch(()=>{}); }catch(e){}
+      // show an alert so user notices
+      alert('JavaScript error: '+e.message+' at '+(e.filename||'')+':'+(e.lineno||'') );
+    });
+  </script>
+  <script src="/static/js/viewer.js?v=20260205ah"></script>
+</body>
+</html>

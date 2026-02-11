@@ -1,0 +1,142 @@
+### Comprehensive Analysis Report: Pathway Enrichment and Clinical Correlation in High- and Low-Risk Patient Groups
+
+This report integrates results from gene set enrichment analysis (GSEA) prerank output (`gseapy.gene_set.prerank.report.csv`) and clinical T_stage distribution statistics (`T_stage_statistics.txt`) to interpret the biological significance and clinical implications of differentially regulated pathways between high- and low-risk patient groups.
+
+---
+
+#### **1. G2-M Checkpoint Pathway**
+
+- **Biological Process**:  
+  The *G2-M Checkpoint* pathway regulates the transition from the G2 phase to mitosis (M phase) in the cell cycle. It ensures DNA integrity before cell division by delaying mitotic entry in response to DNA damage. Key genes involved include *CDC20*, *PLK1*, *AURKB*, *BIRC5*, and *MKI67*, which are central to chromosome segregation, spindle assembly, and cell proliferation.
+
+- **Regulation Trend**:  
+  - **Enrichment Score (ES)**: 0.6556 (> 0) → **Upregulated in high-risk patients**  
+  - **Normalized Enrichment Score (NES)**: 1.955 (significant positive enrichment)  
+  - **FDR q-val**: 0.0 → Highly significant
+
+- **Clinical Correlation**:  
+  Upregulation of this pathway indicates increased cell cycle progression and proliferative activity in **high-risk patients**. This aligns with aggressive tumor behavior. Although T_stage distribution does not show strong differences (p = 0.9974), the molecular signature suggests that high-risk patients may have more biologically active tumors despite similar anatomical staging.
+
+- **Interpretation**:  
+  Activation of the G2-M checkpoint pathway in high-risk patients reflects enhanced mitotic activity and potential genomic instability, contributing to worse prognosis.
+
+---
+
+#### **2. E2F Targets Pathway**
+
+- **Biological Process**:  
+  The *E2F Targets* pathway includes genes regulated by the E2F family of transcription factors, which control the G1/S transition and DNA replication. These genes are crucial for cell cycle initiation and progression (e.g., *CDC20*, *MYBL2*, *CDKN2A*, *KIF4A*, *PLK1*).
+
+- **Regulation Trend**:  
+  - **ES**: 0.6842 (> 0) → **Upregulated in high-risk patients**  
+  - **NES**: 1.928 → Strong positive enrichment  
+  - **FDR q-val**: 0.0 → Highly significant
+
+- **Clinical Correlation**:  
+  Upregulation of E2F targets indicates aberrant cell cycle activation and uncontrolled proliferation in **high-risk patients**. Despite the lack of significant T_stage difference, this pathway highlights a molecular phenotype of aggressive tumor biology.
+
+- **Interpretation**:  
+  The activation of E2F-mediated transcription in high-risk patients suggests dysregulation of key cell cycle checkpoints, likely driven by RB pathway inactivation or oncogenic signaling (e.g., cyclin D-CDK4/6 overactivity).
+
+---
+
+#### **3. Mitotic Spindle Pathway**
+
+- **Biological Process**:  
+  The *Mitotic Spindle* pathway governs the formation and function of the microtubule-based spindle apparatus during mitosis, ensuring accurate chromosome segregation. Genes such as *BIRC5*, *KIF2C*, *TTK*, *PLK1*, and *KIF22* are essential for spindle assembly, kinetochore attachment, and spindle checkpoint control.
+
+- **Regulation Trend**:  
+  - **ES**: 0.7310 (> 0) → **Upregulated in high-risk patients**  
+  - **NES**: 1.818 → Significant positive enrichment  
+  - **FDR q-val**: 0.0 → Highly significant
+
+- **Clinical Correlation**:  
+  Overexpression of mitotic spindle genes is associated with **high-risk patients**, indicating elevated mitotic activity and chromosomal instability. Again, while T_stage distribution is not significantly different (p = 0.9974), the molecular profile suggests a higher proliferative index.
+
+- **Interpretation**:  
+  This pathway reflects a phenotype of aggressive cell division, often observed in poorly differentiated or rapidly progressing cancers. Its upregulation may predict poor outcomes independent of T_stage.
+
+---
+
+#### **4. Glycolysis Pathway**
+
+- **Biological Process**:  
+  The *Glycolysis* pathway involves the metabolic conversion of glucose to pyruvate, generating ATP under aerobic or anaerobic conditions. Cancer cells often upregulate glycolysis even in oxygen-rich environments (Warburg effect). Key genes include *G6PD*, *PKM*, *ENO1*, *SLC16A3*, and *KDELR3*.
+
+- **Regulation Trend**:  
+  - **ES**: 0.6199 (> 0) → **Upregulated in high-risk patients**  
+  - **NES**: 1.722 → Moderate but significant enrichment  
+  - **FDR q-val**: 0.0 → Statistically significant
+
+- **Clinical Correlation**:  
+  Enhanced glycolytic metabolism in **high-risk patients** supports increased energy demands for rapid proliferation and survival in hypoxic tumor microenvironments. This metabolic reprogramming is a hallmark of cancer aggressiveness.
+
+- **Interpretation**:  
+  Upregulated glycolysis in high-risk patients indicates metabolic adaptation favoring tumor growth and resistance to stress. This could be linked to activation of HIF-1α or oncogenic signaling (e.g., PI3K/AKT), although the *Hypoxia* pathway itself shows non-significant enrichment (p = 0.418).
+
+---
+
+#### **5. Epithelial-Mesenchymal Transition (EMT) Pathway**
+
+- **Note**: Although not among the top four by ES, EMT is biologically important and shows **negative enrichment**.
+
+- **Biological Process**:  
+  EMT is a process where epithelial cells lose cell-cell adhesion and gain migratory/invasive mesenchymal properties, facilitating metastasis. Genes like *DCN*, *FBLN5*, *ELN*, and *TIMP3* are typically downregulated during EMT.
+
+- **Regulation Trend**:  
+  - **ES**: -0.455 (< 0) → **Downregulated in high-risk patients**, thus **upregulated in low-risk patients**  
+  - **NES**: -1.354  
+  - **FDR q-val**: 0.061 → Marginally significant
+
+- **Clinical Correlation**:  
+  Higher expression of EMT-related genes in **low-risk patients** may reflect a more epithelial, less invasive phenotype. However, this seems counterintuitive since EMT is usually associated with aggressiveness.
+
+- **Possible Explanation**:  
+  The gene list may represent **epithelial maintenance genes** rather than full EMT activation. Their downregulation in high-risk patients suggests loss of epithelial differentiation, consistent with dedifferentiation and progression.
+
+---
+
+### Summary of Pathway Regulation and Clinical Trends
+
+| Pathway | Regulation in High-Risk Patients | Associated Clinical Trend |
+|--------|-------------------------------|---------------------------|
+| **G2-M Checkpoint** | Upregulated | Increased proliferation, genomic instability |
+| **E2F Targets** | Upregulated | Deregulated cell cycle entry and DNA replication |
+| **Mitotic Spindle** | Upregulated | High mitotic activity, chromosomal instability |
+| **Glycolysis** | Upregulated | Metabolic reprogramming (Warburg effect), energy supply for growth |
+| **EMT (reverse)** | Downregulated (pathway suppressed) | Loss of epithelial features, possible dedifferentiation |
+
+---
+
+### Integrated Interpretation
+
+Despite **no statistically significant difference in T_stage distribution** between high- and low-risk groups (Chi-square p = 0.9974), the GSEA results reveal profound molecular differences:
+
+- **High-risk patients** exhibit upregulation of key oncogenic pathways:
+  - Cell cycle progression (G2-M Checkpoint, E2F Targets)
+  - Mitotic machinery (Mitotic Spindle)
+  - Energy metabolism (Glycolysis)
+
+These collectively indicate a **proliferative, metabolically active, and genomically unstable tumor phenotype**, which likely contributes to worse clinical outcomes regardless of tumor size or local invasion (T_stage).
+
+Conversely, **low-risk patients** show relative downregulation of these pathways, suggesting slower tumor growth and better differentiation. Interestingly, they display higher expression of certain EMT-related structural genes, possibly reflecting a more organized, epithelial-like tumor architecture.
+
+---
+
+### Conclusion
+
+The risk stratification model captures **biologically meaningful differences** beyond anatomical staging (T_stage). High-risk patients are characterized by:
+- Hyperactivation of cell cycle and mitotic pathways
+- Enhanced glycolytic metabolism
+- Molecular signatures of aggressive tumor biology
+
+These findings support the use of **molecular risk scores** as complementary tools to traditional staging systems, enabling more precise prognosis and potential targeting of cell cycle or metabolic pathways in high-risk cases.
+
+---
+
+### Recommendations for Further Study
+
+1. Validate these pathways in independent cohorts.
+2. Investigate therapeutic vulnerabilities (e.g., PLK1, AURKB inhibitors) in high-risk patients.
+3. Integrate with other clinical stages (N, M) and survival data to strengthen prognostic value.
+4. Explore upstream regulators (e.g., MYC, p53 status) driving these pathway activations.

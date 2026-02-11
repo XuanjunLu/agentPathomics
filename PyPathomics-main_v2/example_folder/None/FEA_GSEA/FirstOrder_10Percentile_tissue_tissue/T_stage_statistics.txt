@@ -1,0 +1,14 @@
+Analysis of differences in T_stage between long and short-term groups
+============================================================
+Clinical feature: T_stage
+Feature type: categorical
+
+T_stage         1      2      3      4
+group                                 
+Long_term   0.875  0.125  0.000  0.000
+Short_term  0.250  0.250  0.375  0.125
+
+Chi-square test results:
+Chi-square statistic: 0.8889
+p-value: 0.8281
+Degrees of freedom: 3

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>病理分析报告</title>
+     <style>
+         body{
+            padding: 20px 20px;
+         }
+         .title {
+            display:flex;
+            align-items: center;
+         }
+          .td {
+            width: 80vw;
+            text-align: center;
+            align-items: center;
+            padding: 2px 0px;
+            height:52px;
+            word-break:break-word;
+            display: flex;
+            border: 1px solid #fff;
+            justify-content: center;
+          }
+          .t_bg{
+            background-color: #2169BB;
+          }
+          .d_bg {
+            background-color: #F3EFED;
+          }
+          .page {
+            height:1200px;
+          }
+          .text-section {
+            flex: 1;
+            white-space: pre-line;
+            text-align: justify;
+            padding: 5px 0px;
+            font-size: 12px;
+          }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <!-- 标題區域 -->
+         <div class="page">
+         <div style="font-size:32px;color:rgb(51, 51, 51);font-weight:700;text-align:center;margin-bottom:10px">Pathological Analysis Report</div>
+         <!-- 表格外觀 -->
+          <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-bottom:10px">1. Cross-Validation AUC</div>
+         <div class="title t_bg">
+             {% for item in table_columns %}
+                <div class="td">{{item}}</div>
+             {% endfor %}
+         </div>
+         {% for item in table_rows %}
+             <div class="title d_bg">
+                 {% for sub_item in item %}
+                 <div class="td">{{sub_item}}</div>
+                 {% endfor %}
+             </div>
+          {% endfor %}
+         <!-- 圖表區域 -->
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:30px">2. Feature Selection And ROC Curve</div>
+         <div style="display:flex;justify-content:center;">
+             <img src="{{png_dict.top_feature}}" alt="First Chart" style="width:350px">
+             <img src="{{png_dict.ROC}}" alt="First Chart" style="width:350px">
+         </div>
+         </div>
+     </div>
+ </body>
+ </html>

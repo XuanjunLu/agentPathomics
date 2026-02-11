@@ -1,0 +1,16 @@
+Analysis of differences in T_stage between high and low-risk groups
+============================================================
+Clinical feature: T_stage
+Feature type: categorical
+
+T_stage           1         2         3         4
+group                                            
+High risk  0.470588  0.270588  0.223529  0.035294
+Low risk   0.558140  0.232558  0.209302  0.000000
+
+Chi-square test results:
+Chi-square statistic: 0.0461
+p-value: 0.9974
+Degrees of freedom: 3
+Patients in the low-risk group tend to be in which category of T_stage? Conversely, patients in the high-risk group tend to be in which category of T_stage?
+Tips: In GSEA, if ES > 0, the pathway is upregulated in high-risk patients and downregulated in low-risk patients.

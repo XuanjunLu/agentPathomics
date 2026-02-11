@@ -1,0 +1,6 @@
+Flask>=2.0
+openslide-python
+Pillow
+flask-caching
+pypng
+openslide-bin

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>病理分析报告</title>
+     <style>
+         body{
+            padding: 20px 20px;
+         }
+         .title {
+            display:flex;
+            align-items: center;
+         }
+          .td {
+            width: 80vw;
+            text-align: center;
+            align-items: center;
+            padding: 2px 0px;
+            height:52px;
+            word-break:break-word;
+            display: flex;
+            border: 1px solid #fff;
+            justify-content: center;
+          }
+          .t_bg{
+            background-color: #2169BB;
+          }
+          .d_bg {
+            background-color: #F3EFED;
+          }
+          .page {
+            height:1200px;
+          }
+          .page1{
+            height:1100px;
+          }
+          .text-section {
+            flex: 1;
+            white-space: pre-line;
+            text-align: justify;
+            padding: 5px 0px;
+            font-size: 12px;
+          }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <!-- 标題區域 -->
+         <div class="page">
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:-50px;margin-bottom:30px;">3. Top Feature Violin Plot</div>
+         <div style="display:flex;justify-content:center;">
+             <img src="{{png_dict.violinplots}}" alt="First Chart" style="width:700px;">
+         </div>
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:100px;margin-bottom:30px;">4. Kaplan-Meier-Curve And Radar-Chart</div>
+          <div style="display:flex;justify-content:center;">
+             <img src="{{png_dict.validate}}" alt="First Chart" style="width:350px">
+             <img src="{{png_dict.radar}}" alt="First Chart" style="width:350px">
+         </div>
+         </div>
+     </div>
+ </body>
+ </html>

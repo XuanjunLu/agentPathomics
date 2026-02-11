@@ -1,0 +1,190 @@
+ <!doctype html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>病理分析报告</title>
+     <style>
+         .title {
+            display:flex;
+            align-items: center;
+         }
+          .td {
+            width: 80vw;
+            text-align: center;
+            align-items: center;
+            padding: 2px 0px;
+            height:52px;
+            word-break:break-word;
+            display: flex;
+            border: 1px solid #fff;
+            justify-content: center;
+          }
+          .t_bg{
+            background-color: #2169BB;
+          }
+          .d_bg {
+            background-color: #F3EFED;
+          }
+          .page {
+            height:1200px;
+          }
+          .page1{
+            height:1100px;
+          }
+          .text-section {
+            flex: 1;
+            white-space: pre-line;
+            text-align: justify;
+            padding: 5px 0px;
+            font-size: 12px;
+          }
+     </style>
+ </head>
+ <body>
+     <div class="container">
+         <!-- 标題區域 -->
+         <div class="page">
+         <div style="font-size:32px;color:rgb(51, 51, 51);font-weight:700;text-align:center;margin-bottom:10px">病理分析报告</div>
+         <!-- 表格外觀 -->
+          <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-bottom:10px">1. 交叉验证AUC值</div>
+         <div class="title t_bg">
+             <div class="td"></div>
+             <div class="td">QDA</div>
+             <div class="td">LDA</div>
+             <div class="td">RANDOMForest</div>
+         </div>
+         <div class="title d_bg">
+             <div class="td">Lasso</div>
+             <div class="td">0.5456/0.09677</div>
+             <div class="td">0.7418/0.09278</div>
+             <div class="td">0.8175/0.05959</div>
+         </div>
+         <div class="title d_bg">
+             <div class="td">XGBoost</div>
+             <div class="td">0.5525/0.1037</div>
+             <div class="td">0.7284/0.1206</div>
+             <div class="td">0.8843/0.05916</div>
+         </div>
+         <!-- 圖表區域 -->
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:10px">2. 特征选择及ROC曲线图</div>
+         <div style="display:flex;justify-content:center;">
+             <img src="1.png" alt="First Chart" style="width:350px">
+             <img src="2.png" alt="First Chart" style="width:350px">
+         </div>
+         </div>
+         <div class="page1">
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:10px;margin-bottom:30px;">3. Top特征小提琴图</div>
+         <div style="display:flex;justify-content:center;">
+             <img src="3.png" alt="First Chart" style="width:700px;">
+         </div>
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:100px;margin-bottom:30px;">4. Kaplan-Meier曲线及雷达图</div>
+          <div style="display:flex;justify-content:center;">
+             <img src="4.png" alt="First Chart" style="width:350px">
+             <img src="5.png" alt="First Chart" style="width:350px">
+         </div>
+         </div>
+         <div class="page">
+         <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:10px;margin-bottom:30px;">5. 基因分析</div>
+         <div style="display:flex;justify-content:center;">
+             <div style="display:flex;justify-content:center;">
+                 <img src="6.png" alt="First Chart" style="width:290px;height:420px;">
+             </div>
+             <div style="justify-content:center;">
+                 <img src="7.png" alt="First Chart" style="width:300px">
+                 <img src="9.png" alt="First Chart" style="width:300px">
+             </div>
+             <div style="justify-content:center;">
+                 <img src="8.png" alt="First Chart" style="width:300px">
+                 <img src="10.png" alt="First Chart" style="width:300px">
+             </div>
+         </div>
+         <div style="display:flex;justify-content:center;margin-top:50px;">
+             <img src="11.png" alt="First Chart" style="width:300px">
+             <img src="12.png" alt="First Chart" style="width:500px">
+         </div>
+         </div>
+         <!-- 文本解釋區域 -->
+         <div class="page">
+             <div style="font-size:20px;color:rgb(51, 51, 51);font-weight:700;margin-top:10px;margin-bottom:10px;">6. 大模型解读</div>
+         <div class="text-section">
+             ### 分析报告：基因集富集分析 (GSEA) 结果解读
+            #### 1. 文档概述
+            该 CSV 文件包含了通过 GSEA（Gene Set Enrichment Analysis）对预排名基因列表进行分析的结果。文件中记录了三个主要的基因集及其相关统计信息，包括 ES（Enrichment Score）、NES（Normalized Enrichment Score）、NOM p-value、FDR q-value 和 FWER p-value 等指标。
+
+            #### 2. 数据字段解释
+            - **Name**: 基因集的名称，这里统一为 "prerank"。
+            - **Term**: 生物学通路或功能术语。
+            - **ES**: 富集得分（Enrichment Score），表示基因集中基因在排序列表中的分布情况。
+            - **NES**: 归一化富集得分（Normalized Enrichment Score），用于比较不同基因集之间的富集程度。
+            - **NOM p-val**: 命名 p 值（Nominal p-value），未经多重假设检验校正的 p 值。
+            - **FDR q-val**: 错误发现率 q 值（False Discovery Rate q-value），经过多重假设检验校正后的 p 值。
+            - **FWER p-val**: 家族错误率 p 值（Family-Wise Error Rate p-value），控制所有测试中至少一个假阳性的概率。
+            - **Tag %**: 标记百分比，表示基因集中被标记的基因数量占总基因数的比例。
+            - **Gene %**: 基因百分比，表示基因集中基因的数量占总基因数的比例。
+            - **Lead_genes**: 关键基因（Leading Edge Genes），即对富集结果贡献最大的基因。
+
+            #### 3. 主要通路分析
+
+            ##### 3.1 氧化磷酸化 (Oxidative Phosphorylation)
+            - **ES**: 0.6794
+            - **NES**: 1.5133
+            - **NOM p-val**: 0.0167
+            - **FDR q-val**: 0.0159
+            - **FWER p-val**: 0.01
+            - **Tag %**: 29/42
+            - **Gene %**: 16.65%
+            - **Lead_genes**: MPC1, NDUFA6, NDUFS2, NDUFS1, NDUFB5, MTX2, MRPS22, NDUFC2, MTRF1, NDUFB3, NDUFAB1, MRPL35, MRPS30, MTRR, MRPS11, NDUFA4, NDUFS6, NDUFA2, MRPS12, NDUFB6, NDUFV1, NDUFC1, NDUFS7, NDUFS3, NDUFS4, NDUFB4, NDUFB1, MRPL34, NDUFA5
+
+            **解读**:
+            氧化磷酸化是细胞内能量代谢的重要途径，主要在线粒体中发生。该通路的富集得分较高，且经过多重假设检验校正后的 FDR q 值和 FWER p 值均较低，表明该通路在分析样本中显著富集。关键基因如 MPC1、NDUFA6、NDUFS2 等参与线粒体呼吸链复合体的组装和功能维持，提示样本可能与能量代谢异常或线粒体功能障碍有关。
+
+            ##### 3.2 肌原纤维生成 (Myogenesis)
+            - **ES**: 0.5405
+            - **NES**: 1.1177
+            - **NOM p-val**: 0.2581
+            - **FDR q-val**: 0.4762
+            - **FWER p-val**: 0.5
+            - **Tag %**: 5/27
+            - **Gene %**: 9.50%
+            - **Lead_genes**: MYH4, MYOM1, MYLK, MYH11, MYH9
+
+            **解读**:
+            肌原纤维生成涉及肌肉细胞的分化和发育。尽管该通路的富集得分和归一化富集得分相对较高，但其 NOM p 值、FDR q 值和 FWER p 值均较高，表明该通路在当前样本中的富集并不显著。关键基因如 MYH4、MYOM1 等参与肌动蛋白和肌球蛋白的组装，提示样本可能与肌肉组织的某些特性有关，但需要进一步验证。
+
+            ##### 3.3 顶端连接复合体 (Apical Junction)
+            - **ES**: 0.3618
+            - **NES**: 0.6519
+            - **NOM p-val**: 0.9104
+            - **FDR q-val**: 0.9524
+            - **FWER p-val**: 0.93
+            - **Tag %**: 10/18
+            - **Gene %**: 16.30%
+            - **Lead_genes**: NECTIN2, NECTIN1, MVD, MYH9, MPZL2, NECTIN3, NF1, NFASC, MPP5, MYL12B
+
+            **解读**:
+            顶端连接复合体在上皮细胞中起重要作用，负责维持细胞间的紧密连接。该通路的富集得分和归一化富集得分较低，且 NOM p 值、FDR q 值和 FWER p 值非常高，表明该通路在当前样本中不显著富集。关键基因如 NECTIN2、NECTIN1 等参与细胞间粘附和信号传导，提示样本可能与上皮组织的功能有关，但富集程度不高。
+
+            #### 4. 总结
+            通过对该 CSV 文件的分析，可以得出以下结论：
+
+            - **氧化磷酸化** 是最显著富集的通路，提示样本可能与能量代谢或线粒体功能有关。
+            - **肌原纤维生成** 和 **顶端连接复合体** 的富集程度较低，可能与肌肉组织或上皮组织的某些特性有关，但需要进一步验证。
+
+            #### 5. 图像特征与通路关联
+            根据上述分析，如果存在与能量代谢或线粒体功能相关的图像特征（如线粒体形态变化、ATP 水平变化等），则这些特征可能与 **氧化磷酸化** 通路密切相关。而与肌肉组织或上皮组织相关的图像特征（如肌纤维结构、细胞间连接等）则可能与 **肌原纤维生成** 或 **顶端连接复合体** 通路相关。
+
+            #### 6. 建议
+            为了进一步确认这些通路在样本中的实际作用，建议进行以下工作：
+            - 验证关键基因的表达水平。
+            - 进行更多的实验验证，如 Western Blot、qPCR 等。
+            - 结合其他组学数据（如蛋白质组学、代谢组学）进行综合分析。
+
+            ---
+
+            希望这份报告能帮助您更好地理解 GSEA 分析结果，并为后续研究提供指导。如果您有任何进一步的问题或需要更详细的分析，请随时联系。
+         </div>
+         </div>
+     </div>
+ </body>
+ </html>
