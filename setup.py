@@ -25,7 +25,7 @@ with open('requirements-dev.txt', 'r') as fp:
 with open('requirements-setup.txt', 'r') as fp:
     setup_requirements = list(filter(bool, (line.strip() for line in fp)))
 
-with open('../README.md', 'rb') as fp:
+with open('README.md', 'rb') as fp:
     long_description = fp.read().decode('utf-8')
 
 
@@ -59,14 +59,16 @@ incDirs = [sysconfig.get_python_inc(), numpy.get_include()]
 
 ext = [
     Extension("pathomics._cmatrices",
-              ["pathomics/src/_cmatrices.c", "pathomics/src/cmatrices.c"],
+              ["PyPathomics-main_v2/pathomics/src/_cmatrices.c", "PyPathomics-main_v2/pathomics/src/cmatrices.c"],
               include_dirs=incDirs),
     Extension("pathomics._cshape",
-              ["pathomics/src/_cshape.c", "pathomics/src/cshape.c"],
+              ["PyPathomics-main_v2/pathomics/src/_cshape.c", "PyPathomics-main_v2/pathomics/src/cshape.c"],
               include_dirs=incDirs)
 ]
 
-setup(name='pypathomics',
+setup(package_dir={'': 'PyPathomics-main_v2'},
+      packages=find_packages(where='PyPathomics-main_v2')
+      name='pypathomics',
       url='http://github.com/wuusn/pypathomics#readme',
       project_urls={
           'Radiomics.io': 'https://www.pathomics.io/',
