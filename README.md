@@ -29,7 +29,7 @@ agentPathomics/
 ```
 
 ## Installation
-For Windows, please install Visual Studio C++ Build Tools in advance ([link](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)).
+For Windows, please install ([Visual Studio C++ Build Tools](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)) in advance.
 ```shell
 cd agentPathomics
 conda env create -f environment.yml
