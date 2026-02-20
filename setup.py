@@ -67,7 +67,6 @@ ext = [
 ]
 
 setup(package_dir={'': 'PyPathomics-main_v2'},
-      packages=find_packages(where='PyPathomics-main_v2'),
       name='pypathomics',
       url='http://github.com/wuusn/pypathomics#readme',
       project_urls={
