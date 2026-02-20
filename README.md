@@ -29,17 +29,11 @@ agentPathomics/
 ```
 
 ## Installation
-
-`$ conda create --name agentPathomics python=3.8`
-
-`$ conda activate agentPathomics`
-
-`$ cd agentPathomics`
-
-`$ python -m pip install -r requirements.txt`
-
-`$ python -m pip install -e .`
-
-`$ python example/hello.py`
-
-If you can run `hello.py` successfully, it indicates that the virtual environment has been set up correctly.
+For Windows, please install Visual Studio C++ Build Tools in advance ([link](https://visualstudio.microsoft.com/zh-hans/visual-cpp-build-tools/)).
+```shell
+cd agentPathomics
+conda env create -f environment.yml
+conda env create -f environment_viewer.yml
+```
+It is recommended to have 64 GB of RAM or more.
+Run `stat_all.bat` to start the agent.
